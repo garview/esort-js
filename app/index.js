@@ -36,7 +36,15 @@ const columns = [{
     title: 'e站入库时间',
     dataIndex: 'eInputDate',
     sorter: (a, b) => moment(a.eInputDate,"YYYYMMDD")-moment(b.eInputDate,"YYYYMMDD") ,
+}, {
+    title: '权重',
+    render: (text, record, index) => Math.round(calcWeight(record)),
+    dataIndex: 'weight',
+    sorter:  (a, b) =>calcWeight(a) - calcWeight(b),
 }]
+
+const calcWeight = (record) => (record.length * record.ratingCount * record.favourited * record.averageRating)
+
 class SortTable extends React.Component {
     constructor(props){
         super(props)
