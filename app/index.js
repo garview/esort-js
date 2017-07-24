@@ -8,7 +8,7 @@ require("babel-polyfill");
 //import store from './store'
 //import { Router,browserHistory } from 'react-router';
 import 'whatwg-fetch'
-import {Table} from 'antd'
+import {Table,Rate,Icon,message} from 'antd'
 const columns = [{
     title: "序号",
     render: (text, record, index) => index + 1,
@@ -41,8 +41,20 @@ const columns = [{
     render: (text, record, index) => Math.round(calcWeight(record)),
     dataIndex: 'weight',
     sorter:  (a, b) =>calcWeight(a) - calcWeight(b),
+},{
+    title:'自己的评分',
+    render: (text, record, index) =><Rate character={<Icon type="heart" />} count={3} onChange={value=>handleStarChange(value)} />,
 }]
-
+const handleStarChange = (value) => {
+    let msg = ""
+    if(value==1)
+        msg = "没剧情、画风差，烂！"
+    else if(value==2)
+        msg = "剧情烂俗、画风可以，一般"
+    else if(value==3)
+        msg = "剧情不错、画风可以，推荐"
+    message.info(msg)
+}
 const calcWeight = (record) => (record.length * record.ratingCount * record.favourited * record.averageRating)
 
 class SortTable extends React.Component {
