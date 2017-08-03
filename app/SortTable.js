@@ -1,6 +1,6 @@
 import React from 'react';
 import 'whatwg-fetch'
-import {Table,Rate,Icon,message} from 'antd'
+import {Table,Rate,Icon,message,Row,Col} from 'antd'
 const calcWeight = (record) => (record.length * record.ratingCount * record.favourited * record.averageRating)
 
 export default class SortTable extends React.Component {
@@ -46,6 +46,7 @@ export default class SortTable extends React.Component {
                                                   onChange={value=>this.handleStarChange(record,value)}/>,
         }]
     }
+
     handleStarChange = (record, value) => {
         let msg = ""
         if (value == 1)
@@ -59,7 +60,7 @@ export default class SortTable extends React.Component {
             method: "PUT",
             headers: {"Content-Type": "application/json"},
         }).then(resp=> {
-            if (resp.status == "204"){
+            if (resp.status == "204") {
                 this.loadTableData();
                 success = true
             }
@@ -73,9 +74,11 @@ export default class SortTable extends React.Component {
 
 
     }
+
     componentDidMount() {
         this.loadTableData();
     }
+
     loadTableData = () => {
         const url = "http://localhost:8080/getBooks"
         fetch(url)
@@ -89,10 +92,16 @@ export default class SortTable extends React.Component {
 
     render() {
         return (
-            <Table
-                columns={this.columns}
-                dataSource={this.state.tableData}
-            />
+            <Row>
+                <Col span={4} />
+                <Col span={16} >
+                    <Table
+                        columns={this.columns}
+                        dataSource={this.state.tableData}
+                    />
+                </Col>
+                <Col span={4} />
+            </Row>
         );
     }
 }
