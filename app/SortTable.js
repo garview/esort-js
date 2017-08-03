@@ -13,7 +13,8 @@ export default class SortTable extends React.Component {
         }, {
             title: "番号",
             dataIndex: 'name',
-            render: (text, record, index) => <a href={record.href} target="_blank">{text}</a>,
+            render: (text, record, index) => <div><a href={record.href} target="_blank" title={text}  style={{textOverflow:"ellipsis"}}>{text}</a></div>,
+            width:"666px",
         }, {
             title: '页数',
             dataIndex: 'length',
