@@ -14,7 +14,7 @@ export default class SortTable extends React.Component {
             title: "番号",
             dataIndex: 'name',
             render: (text, record, index) => <div><a href={record.href} target="_blank" title={text}  style={{textOverflow:"ellipsis"}}>{text}</a></div>,
-            width:"666px",
+            width:"600px",
         }, {
             title: '页数',
             dataIndex: 'length',
@@ -51,11 +51,11 @@ export default class SortTable extends React.Component {
     handleStarChange = (record, value) => {
         let msg = ""
         if (value == 1)
-            msg = "没剧情、画风差，烂！"
+            msg = "不要在这里浪费时间！"
         else if (value == 2)
-            msg = "剧情烂俗、画风可以，一般"
+            msg = "很闲的话可以看下"
         else if (value == 3)
-            msg = "剧情不错、画风可以，推荐"
+            msg = "值得推荐"
         let success = false
         fetch(`http://localhost:8080/rateBook?bookId=${record.bookId}&score=${value}`, {
             method: "PUT",
