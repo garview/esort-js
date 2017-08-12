@@ -88,12 +88,15 @@ export default class SortTable extends React.Component {
     }
 
     render() {
+        const categories = ['artistcg','cosplay','doujinshi','gamecg','imageset','manga','misc','non-h','western']
         const columns = [{
             title: "序号",
             render: (text, record, index) => index + 1,
         }, {
             title: '分类',
             dataIndex: 'category',
+            filters: categories.map(t=>({value:t,text:t})),
+            onFilter: (value, record) => record.category.indexOf(value) === 0,
         }, {
             title: "番号",
             dataIndex: 'name',
