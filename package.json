@@ -6,12 +6,18 @@
   "scripts": {
     "start": "webpack-dev-server --open",
     "build": "webpack --config webpack.prod.config.js --color --progress -p",
-    "test": "jest"
+    "test": "jest --debug"
   },
   "author": "",
   "license": "ISC",
+  "jest": {
+    "moduleNameMapper": {
+      "^.*[.](jpg|JPG|gif|GIF|png|PNG|less|LESS|css|CSS)$": "<rootDir>/empty.js"
+    }
+  },
   "devDependencies": {
     "babel-core": "^6.25.0",
+    "babel-jest": "^20.0.3",
     "babel-loader": "^7.1.0",
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-plugin-import": "^1.2.1",
@@ -24,7 +30,7 @@
     "enzyme": "^2.6.0",
     "extract-text-webpack-plugin": "^2.1.2",
     "html-webpack-plugin": "^2.29.0",
-    "jest": "^17.0.3",
+    "jest": "^20.0.4",
     "less": "^2.7.1",
     "less-loader": "^2.2.3",
     "react-addons-test-utils": "^15.4.1",
